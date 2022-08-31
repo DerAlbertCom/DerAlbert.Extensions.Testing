@@ -25,6 +25,8 @@ ProjectSection(SolutionItems) = preProject
 	Directory.Build.props = Directory.Build.props
 	dotnet-test.Build.props = dotnet-test.Build.props
 	.editorconfig = .editorconfig
+	.gitignore = .gitignore
+	.gitattributes = .gitattributes
 EndProjectSection
 EndProject
 Global
