@@ -12,44 +12,36 @@ public class SubjectFactories
         _factories = new Factories();
     }
 
-    [Theory]
-    [InlineData(FakeMode.Lax)]
-    [InlineData(FakeMode.Strict)]
-    public void Creates_an_instance(FakeMode fakeMode)
+    [Fact]
+    public void Creates_an_instance()
     {
-        var subjectFactory = _factories.CreateSubjectFactory(fakeMode);
+        var subjectFactory = _factories.CreateSubjectFactory();
         var result = subjectFactory.Create<SubjectTestClass>();
         result.Should().NotBeNull();
     }
 
-    [Theory]
-    [InlineData(FakeMode.Lax)]
-    [InlineData(FakeMode.Strict)]
-    public void Inject_The_instances(FakeMode fakeMode)
+    [Fact]
+    public void Inject_The_instances()
     {
-        var subjectFactory = _factories.CreateSubjectFactory(fakeMode);
+        var subjectFactory = _factories.CreateSubjectFactory();
         var result = subjectFactory.Create<SubjectTestClass>();
 
         result.One.Should().BeSameAs(result.Two);
     }
 
-    [Theory]
-    [InlineData(FakeMode.Lax)]
-    [InlineData(FakeMode.Strict)]
-    public void Inject_also_concrete_class(FakeMode fakeMode)
+    [Fact]
+    public void Inject_also_concrete_class()
     {
-        var subjectFactory = _factories.CreateSubjectFactory(fakeMode);
+        var subjectFactory = _factories.CreateSubjectFactory();
         var result = subjectFactory.Create<SubjectTestClass>();
 
         result.One.Should().BeSameAs(result.Injected.One);
     }
 
-    [Theory]
-    [InlineData(FakeMode.Lax)]
-    [InlineData(FakeMode.Strict)]
-    public void Inject_injected_instances(FakeMode fakeMode)
+    [Fact]
+    public void Inject_injected_instances()
     {
-        var (subjectFactory, fakeFactory) = _factories.CreateFactories(fakeMode);
+        var (subjectFactory, fakeFactory) = _factories.CreateFactories();
         var o1 = new FooBarOptions();
         var o2 = new BarFooOptions();
         fakeFactory.Inject(o1);

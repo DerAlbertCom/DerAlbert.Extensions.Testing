@@ -11,7 +11,6 @@ internal class FakeFactory : IFakeAccessor
     public FakeFactory(FakeServiceCollection services)
     {
         _fakeServices = services;
-        FakeMode = services.FakeMode;
     }
 
     public object The(Type type)
@@ -46,7 +45,7 @@ internal class FakeFactory : IFakeAccessor
     internal object? CreateInstance(Type type, bool mockOnly)
     {
         object? instance = null;
-        if (!mockOnly && (_fakeServices.ServicesAvailable || FakeMode == FakeMode.Lax))
+        if (!mockOnly && _fakeServices.ServicesAvailable)
         {
             if (IsServiceAvailable(type))
             {
@@ -134,7 +133,7 @@ internal class FakeFactory : IFakeAccessor
 
     public object CallbackInServiceScope(Func<FakeFactory, object> callback)
     {
-        if (!_fakeServices.ServicesAvailable && FakeMode == FakeMode.Strict)
+        if (!_fakeServices.ServicesAvailable)
         {
             return callback(this);
         }
@@ -155,5 +154,5 @@ internal class FakeFactory : IFakeAccessor
 
     internal IServiceProvider ServiceProvider => _scopedProvider ?? _fakeServices.ServiceProvider;
 
-    internal FakeMode FakeMode { get; private set; }
+    // internal FakeMode FakeMode { get; private set; }
 }

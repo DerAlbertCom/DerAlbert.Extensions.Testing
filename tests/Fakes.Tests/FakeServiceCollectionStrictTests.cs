@@ -10,7 +10,7 @@ public class FakeServiceCollectionStrictTests
     [Fact]
     public void Should_throw_when_register_services_after_building_a_service_provider()
     {
-        var services = new FakeServiceCollection(FakeMode.Strict, BuildServiceProviderMode.Permitted);
+        var services = new FakeServiceCollection(BuildServiceProviderMode.Permitted);
 
         services.AddTransient<IA, A>();
 
@@ -26,7 +26,7 @@ public class FakeServiceCollectionStrictTests
     [Fact]
     public void Should_throw_when_building_a_service_provider_and_no_services_a_registered()
     {
-        var services = new FakeServiceCollection(FakeMode.Strict, BuildServiceProviderMode.Permitted);
+        var services = new FakeServiceCollection(BuildServiceProviderMode.Permitted);
 
         var action = () => services.ServiceProvider;
 

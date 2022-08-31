@@ -4,21 +4,7 @@ namespace DerAlbert.Extensions.Fakes.Internal;
 
 internal static class GlobalConfig
 {
-    private static FakeMode? _fakeMode;
     private static BuildServiceProviderMode? _providerMode;
-
-    public static FakeMode DefaultFakeMode
-    {
-        get
-        {
-            if (!_fakeMode.HasValue)
-            {
-                _fakeMode = GetDefaultFakeMode();
-            }
-
-            return _fakeMode.Value;
-        }
-    }
 
     public static BuildServiceProviderMode DefaultBuilderServiceProviderMode
     {
@@ -48,23 +34,6 @@ internal static class GlobalConfig
         }
 
         return attributes[0].BuildServiceProviderMode;
-    }
-
-    private static FakeMode GetDefaultFakeMode()
-    {
-        var attributes = FindAssemblyAttributes<DefaultFakeModeAttribute>();
-
-        if (attributes.Length == 0)
-        {
-            return FakeMode.Strict;
-        }
-
-        if (attributes.Length > 1)
-        {
-            throw new FakesSetupException($"Multiple usages of {nameof(DefaultFakeModeAttribute)} found.");
-        }
-
-        return attributes[0].FakeMode;
     }
 
     private static TAttribute[] FindAssemblyAttributes<TAttribute>() where TAttribute : Attribute

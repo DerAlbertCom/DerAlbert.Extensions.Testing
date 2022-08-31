@@ -25,7 +25,7 @@ public class TheOne
 
 public abstract class ClockSubject<T> : WithSubject<T> where T : class
 {
-    public ClockSubject() : base(FakeMode.Strict)
+    public ClockSubject() : base()
     {
         With<FakeServiceCollectionTests.AddingServiceBehavior>();
     }

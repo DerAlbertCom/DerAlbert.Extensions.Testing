@@ -13,15 +13,10 @@ public abstract class WithFakes : IFakeAccessor, IDisposable
 
     protected WithFakes()
     {
-        _serviceCollection = new FakeServiceCollection(GlobalConfig.DefaultFakeMode, GlobalConfig.DefaultBuilderServiceProviderMode);
+        _serviceCollection = new FakeServiceCollection(GlobalConfig.DefaultBuilderServiceProviderMode);
         _factory = new FakeFactory(_serviceCollection);
     }
 
-    protected WithFakes(FakeMode fakeMode)
-    {
-        _serviceCollection = new FakeServiceCollection(fakeMode);
-        _factory = new FakeFactory(_serviceCollection);
-    }
 
     /// <summary>
     /// Creates a Subject under Test, normally you Should Use WithSubject&lt;T&gt; this is only for creating
@@ -70,7 +65,8 @@ public abstract class WithFakes : IFakeAccessor, IDisposable
         return callback(scope.ServiceProvider.GetRequiredService<TService>());
     }
 
-    protected async Task<TResult> FromServiceScopeAsync<TService, TResult>(Func<TService, Task<TResult>> callback) where TService : notnull
+    protected async Task<TResult> FromServiceScopeAsync<TService, TResult>(Func<TService, Task<TResult>> callback)
+        where TService : notnull
     {
         var scope = _factory.ServiceProvider.CreateScope();
         return await callback(scope.ServiceProvider.GetRequiredService<TService>());

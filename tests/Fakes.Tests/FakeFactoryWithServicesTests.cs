@@ -9,7 +9,7 @@ public class FakeFactoryWithServicesTests
 {
     private FakeFactory CreateFactory()
     {
-        var serviceCollection = new FakeServiceCollection(FakeMode.Lax);
+        var serviceCollection = new FakeServiceCollection();
         serviceCollection.AddTransient<IFakeTest, FakeTest>();
         return new FakeFactory(serviceCollection);
     }

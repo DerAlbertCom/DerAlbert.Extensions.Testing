@@ -4,7 +4,7 @@ using Xunit;
 
 namespace DerAlbert.Extensions.Fakes.Tests;
 
-public class SubjectFactoryLaxTests 
+public class SubjectFactoryLaxTests
 {
     private readonly Factories _factories;
 
@@ -12,11 +12,11 @@ public class SubjectFactoryLaxTests
     {
         _factories = new Factories();
     }
-    
+
     [Fact]
     public void Is_same_instance_injection_in_services()
     {
-        var (subjectFactory, fakeFactory) = _factories.CreateFactories(FakeMode.Lax);
+        var (subjectFactory, fakeFactory) = _factories.CreateFactories();
 
         var i1 = fakeFactory.An<IFakeTest>();
         fakeFactory.Services.AddSingleton(i1);

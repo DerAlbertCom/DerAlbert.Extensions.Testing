@@ -4,21 +4,21 @@ namespace DerAlbert.Extensions.Fakes.Tests;
 
 internal class Factories
 {
-    public SubjectFactory CreateSubjectFactory(FakeMode fakeMode)
+    public SubjectFactory CreateSubjectFactory()
     {
-        var factories = CreateFactories(fakeMode);
+        var factories = CreateFactories();
         return factories.subjectFactory;
     }
 
-    public FakeFactory CreateFakeFactory(FakeMode fakeMode)
+    public FakeFactory CreateFakeFactory()
     {
-        return new FakeFactory(new FakeServiceCollection(fakeMode));
+        return new FakeFactory(new FakeServiceCollection());
     }
-    
 
-    public (SubjectFactory subjectFactory, FakeFactory fakeFactory) CreateFactories(FakeMode fakeMode)
+
+    public (SubjectFactory subjectFactory, FakeFactory fakeFactory) CreateFactories()
     {
-        var fakeFactory = CreateFakeFactory(fakeMode);
+        var fakeFactory = CreateFakeFactory();
         var subjectFactory = new SubjectFactory(fakeFactory);
 
         return (subjectFactory, fakeFactory);

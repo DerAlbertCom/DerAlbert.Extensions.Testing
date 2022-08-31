@@ -19,11 +19,6 @@ public abstract class WithSubject<T> : WithFakes where T : class
         _lazySubject = new Lazy<T>(CreateSubject);
     }
 
-    protected WithSubject(FakeMode fakeMode) : base(fakeMode)
-    {
-        _lazySubject = new Lazy<T>(CreateSubject);
-    }
-
     private T CreateSubject()
     {
         var subject = CreateSubjectUnderTest<T>();

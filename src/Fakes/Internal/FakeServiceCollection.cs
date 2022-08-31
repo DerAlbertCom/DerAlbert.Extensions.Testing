@@ -8,10 +8,8 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 {
     internal bool Modified { get; private set; } = true;
 
-    public FakeServiceCollection(FakeMode fakeMode,
-        BuildServiceProviderMode buildServiceProviderMode = BuildServiceProviderMode.Forbidden)
+    public FakeServiceCollection(BuildServiceProviderMode buildServiceProviderMode = BuildServiceProviderMode.Forbidden)
     {
-        _fakeMode = fakeMode;
         _buildServiceProviderMode = buildServiceProviderMode;
         _services = new ServiceCollection();
     }
@@ -57,14 +55,7 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
     }
 
 
-    public int Count
-    {
-        get
-        {
-//                EnsureBuildingAServiceProviderIsAllowed();
-            return _services.Count;
-        }
-    }
+    public int Count => _services.Count;
 
     internal bool ServicesAvailable => _services.Count > 0;
 
@@ -112,7 +103,7 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
         {
             if (Modified)
             {
-                if (_services.Count == 0 && FakeMode == FakeMode.Strict)
+                if (_services.Count == 0)
                 {
                     throw new FakesSetupException(
                         $"In Strict mode you cannot create a ServiceProvider without registered Services. For this you have enabled FakeMode.Lax");
@@ -129,8 +120,6 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
             return _serviceProvider!;
         }
     }
-
-    public FakeMode FakeMode => _fakeMode;
 
     public void Dispose()
     {
@@ -155,11 +144,6 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
             }
         }
 
-        if (_fakeMode == FakeMode.Lax)
-        {
-            return;
-        }
-
         // only an assumption; because BuildServiceProvider does not copy the service collection
         // when no services are registered, so it hase to checked before building the Service Provider
         if (_services.Count == 0)
@@ -171,11 +155,6 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 
     private void EnsureModificationIsAllowed([CallerMemberName] string? memberName = default)
     {
-        if (_fakeMode == FakeMode.Lax)
-        {
-            return;
-        }
-
         if (_serviceProviderWasBuild)
         {
             throw new FakesSetupException(
@@ -188,7 +167,6 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 
     private IServiceProvider? _serviceProvider;
     private readonly Stack<IServiceProvider> _serviceProviders = new();
-    private readonly FakeMode _fakeMode;
     private readonly BuildServiceProviderMode _buildServiceProviderMode;
     private bool _serviceProviderWasBuild;
     private bool _internalServiceProviderBuild;

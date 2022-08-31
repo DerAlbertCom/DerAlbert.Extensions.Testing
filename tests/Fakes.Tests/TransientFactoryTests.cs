@@ -36,7 +36,7 @@ public class TransientFactoryTests
 
     private FakeFactory CreateFakeFactory()
     {
-        var serviceCollection = new FakeServiceCollection(FakeMode.Lax);
+        var serviceCollection = new FakeServiceCollection();
         serviceCollection.AddTransient<FactoryFakeTest>(sp => new FactoryFakeTest(13));
         serviceCollection.AddTransient<IFakeFactoryTest>(sp => sp.GetRequiredService<FactoryFakeTest>());
         return new FakeFactory(serviceCollection);
