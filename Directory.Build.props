@@ -9,12 +9,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/DerAlbertCom/DerAlbert.Extensions.Testing</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Update="GitVersion.MSBuild" Version="5.10.3" />
     <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
-    <!--    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.1.1" />-->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
