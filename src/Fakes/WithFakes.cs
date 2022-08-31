@@ -13,7 +13,7 @@ public abstract class WithFakes : IFakeAccessor, IDisposable
 
     protected WithFakes()
     {
-        _serviceCollection = new FakeServiceCollection(GlobalConfig.DefaultBuilderServiceProviderMode);
+        _serviceCollection = new FakeServiceCollection();
         _factory = new FakeFactory(_serviceCollection);
     }
 

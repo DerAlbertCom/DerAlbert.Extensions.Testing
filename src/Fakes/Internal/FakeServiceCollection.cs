@@ -8,9 +8,8 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 {
     internal bool Modified { get; private set; } = true;
 
-    public FakeServiceCollection(BuildServiceProviderMode buildServiceProviderMode = BuildServiceProviderMode.Forbidden)
+    public FakeServiceCollection()
     {
-        _buildServiceProviderMode = buildServiceProviderMode;
         _services = new ServiceCollection();
     }
 
@@ -135,13 +134,10 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 
     private void EnsureBuildingAServiceProviderIsAllowed()
     {
-        if (_buildServiceProviderMode == BuildServiceProviderMode.Forbidden)
+        if (!_internalServiceProviderBuild)
         {
-            if (!_internalServiceProviderBuild)
-            {
-                throw new FakesSetupException(
-                    "It not allowed to create ServiceProvider by yourself. For this you must enable BuildServiceProviderMode.Permitted");
-            }
+            throw new FakesSetupException(
+                "It not allowed to create ServiceProvider by yourself. For this you must enable BuildServiceProviderMode.Permitted");
         }
 
         // only an assumption; because BuildServiceProvider does not copy the service collection
@@ -167,7 +163,6 @@ internal class FakeServiceCollection : IServiceCollection, IDisposable
 
     private IServiceProvider? _serviceProvider;
     private readonly Stack<IServiceProvider> _serviceProviders = new();
-    private readonly BuildServiceProviderMode _buildServiceProviderMode;
     private bool _serviceProviderWasBuild;
     private bool _internalServiceProviderBuild;
 }

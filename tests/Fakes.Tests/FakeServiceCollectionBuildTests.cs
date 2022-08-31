@@ -11,7 +11,7 @@ public class FakeServiceCollectionBuildTests
     [Fact]
     public void Forbidden_Build_allows_central_ServiceProvider_build()
     {
-        var services = new FakeServiceCollection(BuildServiceProviderMode.Forbidden);
+        var services = new FakeServiceCollection();
 
         services.TryAddScoped<IScoped, Scoped>();
 
@@ -23,7 +23,7 @@ public class FakeServiceCollectionBuildTests
     [Fact]
     public void Forbidden_Build_forbids_local_ServiceProvider_build()
     {
-        var services = new FakeServiceCollection(BuildServiceProviderMode.Forbidden);
+        var services = new FakeServiceCollection();
 
         services.TryAddScoped<IScoped, Scoped>();
 
@@ -35,7 +35,7 @@ public class FakeServiceCollectionBuildTests
     [Fact]
     public void Permitted_Build_allows_central_ServiceProvider_build()
     {
-        var services = new FakeServiceCollection(BuildServiceProviderMode.Permitted);
+        var services = new FakeServiceCollection();
 
         services.TryAddScoped<IScoped, Scoped>();
 
@@ -44,15 +44,4 @@ public class FakeServiceCollectionBuildTests
         serviceProvider.Should().NotBeNull();
     }
 
-    [Fact]
-    public void Permitted_Build_allows_local_ServiceProvider_build()
-    {
-        var services = new FakeServiceCollection(BuildServiceProviderMode.Permitted);
-
-        services.TryAddScoped<IScoped, Scoped>();
-
-        var serviceProvider = services.BuildServiceProvider();
-
-        serviceProvider.Should().NotBeNull();
-    }
 }
