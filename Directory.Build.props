@@ -1,0 +1,27 @@
+﻿<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Authors>Albert Weinert</Authors>
+    <Copyright>Copyright (C) 2017-2022 Albert Weinert</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Some helping base classes, for easier test setup. Using NSubstitute </Description>
+    <PackageTags>unit test, nsubstitute</PackageTags>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Update="GitVersion.MSBuild" Version="5.10.3" />
+    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
+<!--    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.1.1" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo" Condition="$(AssemblyName.EndsWith('.Tests')) == false">
+      <_Parameter1>$(AssemblyName).Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ExtensionsVersion>6.0.0</ExtensionsVersion>
+  </PropertyGroup>
+</Project>

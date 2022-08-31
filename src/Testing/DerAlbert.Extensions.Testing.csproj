@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <IsTestProject>false</IsTestProject>
+    <RootNamespace>DerAlbert.Extensions.Testing</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fakes\DerAlbert.Extensions.Fakes.csproj" />
+    <ProjectReference Include="..\Xunit\DerAlbert.Extensions.Xunit.csproj" />
+  </ItemGroup>
+</Project>
