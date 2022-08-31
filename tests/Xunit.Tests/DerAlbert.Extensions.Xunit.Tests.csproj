@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
     <RootNamespace>DerAlbert.Extensions.Xunit.Tests</RootNamespace>
@@ -13,5 +12,4 @@
     <ProjectReference Include="..\..\src\Fakes\DerAlbert.Extensions.Fakes.csproj" />
     <ProjectReference Include="..\..\src\Xunit\DerAlbert.Extensions.Xunit.csproj" />
   </ItemGroup>
-
 </Project>

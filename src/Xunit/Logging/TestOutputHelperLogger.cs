@@ -11,7 +11,7 @@ internal class TestOutputHelperLogger : ILogger
         _categoryName = categoryName;
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
         var startFormat = formatter(state, exception);
         _testOutputHelper.WriteLine($"[{logLevel}] {_categoryName} ({eventId}) {startFormat}");
@@ -25,6 +25,7 @@ internal class TestOutputHelperLogger : ILogger
 
     public IDisposable BeginScope<TState>(TState state)
     {
+        if (state == null) throw new ArgumentNullException(nameof(state));
         return new StateScope(state);
     }
 

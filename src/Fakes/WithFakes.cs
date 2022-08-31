@@ -25,7 +25,7 @@ public abstract class WithFakes : IFakeAccessor, IDisposable
 
     /// <summary>
     /// Creates a Subject under Test, normally you Should Use WithSubject&lt;T&gt; this is only for creating
-    /// Subject of Internal Classes 
+    /// Subject of Internal Classes
     /// </summary>
     /// <typeparam name="TSubject"></typeparam>
     /// <param name="modifyAction"></param>
@@ -64,25 +64,25 @@ public abstract class WithFakes : IFakeAccessor, IDisposable
         }
     }
 
-    protected TResult FromServiceScope<TService, TResult>(Func<TService, TResult> callback)
+    protected TResult FromServiceScope<TService, TResult>(Func<TService, TResult> callback) where TService : notnull
     {
         var scope = _factory.ServiceProvider.CreateScope();
         return callback(scope.ServiceProvider.GetRequiredService<TService>());
     }
 
-    protected async Task<TResult> FromServiceScopeAsync<TService, TResult>(Func<TService, Task<TResult>> callback)
+    protected async Task<TResult> FromServiceScopeAsync<TService, TResult>(Func<TService, Task<TResult>> callback) where TService : notnull
     {
         var scope = _factory.ServiceProvider.CreateScope();
         return await callback(scope.ServiceProvider.GetRequiredService<TService>());
     }
 
-    protected void InServiceScope<TService>(Action<TService> callback)
+    protected void InServiceScope<TService>(Action<TService> callback) where TService : notnull
     {
         var scope = _factory.ServiceProvider.CreateScope();
         callback(scope.ServiceProvider.GetRequiredService<TService>());
     }
 
-    protected async Task InServiceScopeAsync<TService>(Func<TService, Task> callback)
+    protected async Task InServiceScopeAsync<TService>(Func<TService, Task> callback) where TService : notnull
     {
         var scope = _factory.ServiceProvider.CreateScope();
         await callback(scope.ServiceProvider.GetRequiredService<TService>());

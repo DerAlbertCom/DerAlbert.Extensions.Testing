@@ -5,8 +5,8 @@
     </PropertyGroup>
     <!-- these are the global nuget packages which should be used for every unit testing project, add a Directory.Builds.props file which imports this file-->
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="6.7"/>
-        <PackageReference Include="xunit.core" Version="2.4.1"/>
+        <PackageReference Include="FluentAssertions" Version="6.7.0"/>
+        <PackageReference Include="xunit.core" Version="2.4.2"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
